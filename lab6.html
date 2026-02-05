@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 6 – 360 Gallery</title>
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <script>
+    AFRAME.registerComponent('change-sky', {
+      schema: { img: {type: 'string'} },
+      init: function () {
+        this.el.addEventListener('click', () => {
+          document.querySelector('#sky')
+            .setAttribute('src', this.data.img);
+        });
+      }
+    });
+  </script>
+
+  <style>
+    body { margin:0; overflow:hidden; }
+  </style>
+</head>
+
+<body>
+
+<a-scene>
+
+  <!-- Assets -->
+  <a-assets>
+    <img id="p1" src="image1.jpg">
+    <img id="p2" src="image2.jpg">
+    <img id="p3" src="image3.jpg">
+  </a-assets>
+
+  <!-- Camera centered -->
+  <a-camera position="0 1.6 0"
+            cursor="rayOrigin: mouse"
+            raycaster="objects: .hotspot">
+  </a-camera>
+
+  <!-- 360 Sky -->
+  <a-sky id="sky" src="#p1"></a-sky>
+
+  <!-- Bottom aligned buttons -->
+  <a-circle class="hotspot"
+            position="-2 0.8 -3"
+            radius="0.35"
+            color="#FF3B30"
+            change-sky="img: #p1"></a-circle>
+
+  <a-circle class="hotspot"
+            position="0 0.8 -3"
+            radius="0.35"
+            color="#0A84FF"
+            change-sky="img: #p2"></a-circle>
+
+  <a-circle class="hotspot"
+            position="2 0.8 -3"
+            radius="0.35"
+            color="#30D158"
+            change-sky="img: #p3"></a-circle>
+
+  <!-- Labels -->
+  <a-text value="Scene 1"
+          position="-2 1.4 -3"
+          align="center"
+          color="white"
+          width="4"></a-text>
+
+  <a-text value="Scene 2"
+          position="0 1.4 -3"
+          align="center"
+          color="white"
+          width="4"></a-text>
+
+  <a-text value="Scene 3"
+          position="2 1.4 -3"
+          align="center"
+          color="white"
+          width="4"></a-text>
+
+</a-scene>
+
+</body>
+</html>
